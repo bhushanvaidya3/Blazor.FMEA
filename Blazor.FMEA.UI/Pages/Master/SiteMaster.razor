@@ -1,0 +1,33 @@
+﻿@page "/siteMaster"
+@inherits SiteMasterBase
+
+<h1>Site Master</h1>
+
+@if (siteMasterDOs == null)
+{
+    <em>Loading...</em>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>Site Number</th>
+            <th>Site Description</th>
+            <th>Site Abbr</th>
+            <th>Edit</th>
+        </tr>
+        @foreach (var rec in siteMasterDOs)
+        {
+            <tr>
+                <td>@rec.Site_Number</td>
+                <td>@rec.Site_Desc</td>
+                <td>@rec.Site_Abbr</td>
+                <td>
+                    <a href="@($"siteMasterDetail/{rec.Site_Number}")" class="btn btn-primary">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </table>
+}
