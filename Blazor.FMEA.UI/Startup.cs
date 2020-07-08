@@ -21,7 +21,7 @@ namespace Blazor.FMEA.UI
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            var fmeaApiURI = new Uri("https://localhost:44384/");
+            var fmeaApiURI = new Uri(Configuration.GetSection("API").GetSection("fmeaApiURI").Value);
 
             services.AddRazorPages();
             services.AddServerSideBlazor();
