@@ -1,5 +1,7 @@
 ﻿@page "/siteMaster"
 @inherits SiteMasterBase
+@using BlazorTable
+@using Blazor.FMEA.Shared.Models.Master
 
 <h1>Site Master</h1>
 
@@ -9,7 +11,7 @@
 }
 else
 {
-    <table class="table">
+    @*<table class="table">
         <tr>
             <th>Site Number</th>
             <th>Site Description</th>
@@ -29,5 +31,20 @@ else
                 </td>
             </tr>
         }
-    </table>
+    </table>*@
+
+    <Table TableItem ="SiteMasterDO" Items="siteMasterDOs" PageSize="15">
+        <Column TableItem="SiteMasterDO" Title="Site Number" Field="@(x => x.Site_Number)" Sortable="true" Filterable="true" Width="20%" />
+        <Column TableItem="SiteMasterDO" Title="Site Description" Field="@(x => x.Site_Desc)" Sortable="true" Filterable="true" Width="20%" />
+        <Column TableItem="SiteMasterDO" Title="Site Abbr" Field="@(x => x.Site_Abbr)" Sortable="true" Filterable="true" Width="20%">
+        </Column>
+        <Column TableItem="SiteMasterDO" Title="Edit" Field="@(x => x.Site_Number)" Sortable="true" Width="10%">
+            <Template>
+                <a href="@($"siteMasterDetail/{context.Site_Number}")" class="btn btn-primary">
+                    <i class="fas fa-edit"></i>
+                </a>
+            </Template>
+        </Column>
+        <Pager ShowPageNumber="true" ShowTotalCount="true" ShowPageSizes="true" />
+    </Table>
 }
