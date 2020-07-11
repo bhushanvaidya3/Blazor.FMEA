@@ -53,5 +53,38 @@ namespace Blazor.FMEA.Data.Master
 
             return siteMaster;
         }
+
+        public SiteMasterDO UpdateSiteMaster(SiteMasterDO smObj)
+        {
+            string site_op = string.Empty;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(FMEADBConnectionstring))
+                {
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = "FMEA_SP_UpdateSiteMaster";
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+                        command.CommandTimeout = FMEADBTimeout;
+                        command.Parameters.AddWithValue("@Site_Number", smObj.Site_Number);
+                        command.Parameters.AddWithValue("@Site_Abbr", smObj.Site_Abbr);
+                        command.Parameters.AddWithValue("@Site_Desc", smObj.Site_Desc);
+                        command.Parameters.AddWithValue("@Site_Operational", smObj.Update_Operational ? smObj.Site_Operational : false);
+                        command.Parameters.AddWithValue("@Update_Operational", smObj.Update_Operational);
+
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+
+            return smObj;
+        }
     }
 }

@@ -1,0 +1,32 @@
+﻿@page "/siteMasterDetail"
+@page "/siteMasterDetail/{Site_Number}"
+@inherits SiteMasterDetailBase
+
+<h3>Site Master Detail</h3>
+<hr />
+
+<EditForm Model="@SiteMasterDO" OnValidSubmit="@HandleValidSubmit">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group row">
+        <label for="siteNumber" class="col-sm-3">Site Number: </label>
+        <InputText id="siteNumber" @bind-Value="@SiteMasterDO.Site_Number" class="form-control col-sm-8" placeholder="Site Number"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => SiteMasterDO.Site_Number)" />
+    </div>
+
+    <div class="form-group row">
+        <label for="siteAbbr" class="col-sm-3">Site Abbr: </label>
+        <InputText id="siteAbbr" class="form-control col-sm-8" @bind-Value="@SiteMasterDO.Site_Abbr" placeholder="Site Abbr"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => SiteMasterDO.Site_Abbr)" />
+    </div>
+
+
+    <div class="form-group row">
+        <label for="siteDesc" class="col-sm-3">Site Description: </label>
+        <InputTextArea id="siteDesc" class="form-control col-sm-8" @bind-Value="@SiteMasterDO.Site_Desc" placeholder="Site Description"></InputTextArea>
+    </div>
+    <button type="submit" class="btn btn-primary edit-btn">Save</button>
+</EditForm>
+
+<button class="btn btn-secondary" @onclick="HandleNavigateToListPage">Back</button>

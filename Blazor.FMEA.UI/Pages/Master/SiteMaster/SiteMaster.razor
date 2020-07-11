@@ -11,7 +11,7 @@
 }
 else
 {
-    @*<table class="table">
+    <table class="table">
         <tr>
             <th>Site Number</th>
             <th>Site Description</th>
@@ -31,9 +31,9 @@ else
                 </td>
             </tr>
         }
-    </table>*@
+    </table>
 
-    <Table TableItem ="SiteMasterDO" Items="siteMasterDOs" PageSize="15">
+    @*<Table TableItem ="SiteMasterDO" Items="siteMasterDOs" PageSize="15">
         <Column TableItem="SiteMasterDO" Title="Site Number" Field="@(x => x.Site_Number)" Sortable="true" Filterable="true" Width="20%" />
         <Column TableItem="SiteMasterDO" Title="Site Description" Field="@(x => x.Site_Desc)" Sortable="true" Filterable="true" Width="20%" />
         <Column TableItem="SiteMasterDO" Title="Site Abbr" Field="@(x => x.Site_Abbr)" Sortable="true" Filterable="true" Width="20%">
@@ -46,5 +46,5 @@ else
             </Template>
         </Column>
         <Pager ShowPageNumber="true" ShowTotalCount="true" ShowPageSizes="true" />
-    </Table>
+    </Table>*@
 }

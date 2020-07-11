@@ -6,5 +6,6 @@ namespace Blazor.FMEA.Data.Master
     public interface ISiteMasterRepository
     {
         IEnumerable<SiteMasterDO> GetAll();
+        SiteMasterDO UpdateSiteMaster(SiteMasterDO smObj);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Blazor.FMEA.Data.Master;
+using Blazor.FMEA.Shared.Models.Master;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -19,6 +20,18 @@ namespace Blazor.FMEA.Api.Controllers.Master
         public IActionResult GetAllSiteMasterRecords()
         {
             return Ok(_siteMasterRepository.GetAll().ToArray());
+        }
+
+        [HttpGet("{Site_Number}")]
+        public IActionResult GetAllSiteMasterRecordByNumber(string Site_Number)
+        {
+            return Ok(_siteMasterRepository.GetAll().Where(x => x.Site_Number == Site_Number).FirstOrDefault());
+        }
+
+        [HttpPut()]
+        public IActionResult UpdateSiteMasterRecord(SiteMasterDO siteMasterDO)
+        {
+            return Ok(_siteMasterRepository.UpdateSiteMaster(siteMasterDO));
         }
     }
 }

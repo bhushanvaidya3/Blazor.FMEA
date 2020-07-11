@@ -7,5 +7,8 @@ namespace Blazor.FMEA.UI.Services.Master
     public interface ISiteMasterDataService
     {
         Task<IEnumerable<SiteMasterDO>> GetSiteMasterDOs();
+        Task<SiteMasterDO> GetSiteMasterRecordByNumber(string Site_Number);
+        Task<SiteMasterDO> UpdateSiteMasterRecord(SiteMasterDO siteMasterDO);
+
     }
 }
