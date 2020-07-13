@@ -1,4 +1,5 @@
 using Blazor.FMEA.UI.Services.Master;
+using Blazored.Toast;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -25,6 +26,7 @@ namespace Blazor.FMEA.UI
 
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddBlazoredToast();
 
             void RegisterTypedClient<TClient, TImplementation>(Uri apiBaseUrl)
                 where TClient : class where TImplementation : class, TClient
