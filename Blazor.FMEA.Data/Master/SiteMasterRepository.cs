@@ -13,6 +13,39 @@ namespace Blazor.FMEA.Data.Master
 
         private int FMEADBTimeout { get; } = 300;
 
+        public SiteMasterDO CreateSiteMaster(SiteMasterDO smObj)
+        {
+            string site_op = string.Empty;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(FMEADBConnectionstring))
+                {
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = "FMEA_SP_InsertsmObjRecord";
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+                        command.CommandTimeout = FMEADBTimeout;
+                        command.Parameters.AddWithValue("@Site_Number", smObj.Site_Number);
+                        command.Parameters.AddWithValue("@Site_Abbr", smObj.Site_Abbr);
+                        command.Parameters.AddWithValue("@Site_Desc", smObj.Site_Desc);
+                        command.Parameters.AddWithValue("@Site_Operational", smObj.Update_Operational ? smObj.Site_Operational : false);
+                        command.Parameters.AddWithValue("@Insert_Operational", smObj.Update_Operational);
+
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+
+            return smObj;
+        }
+
         public IEnumerable<SiteMasterDO> GetAll()
         {
             List<SiteMasterDO> siteMaster = new List<SiteMasterDO>();
@@ -85,6 +118,34 @@ namespace Blazor.FMEA.Data.Master
             }
 
             return smObj;
+        }
+
+        public int DeleteSiteMaster(string Site_Number)
+        {
+            using (SqlConnection connection = new SqlConnection(FMEADBConnectionstring))
+            {
+                try
+                {
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = "FMEA_SP_DeleteSiteMasterRecord";
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+                        command.CommandTimeout = FMEADBTimeout;
+                        command.Parameters.AddWithValue("@Site_Number", Site_Number);
+
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+
+                }
+                catch (SqlException ex)
+                {
+                    throw ex;
+                }
+            }
+
+            return 1;
         }
     }
 }

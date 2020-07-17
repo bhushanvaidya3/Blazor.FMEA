@@ -37,5 +37,12 @@
     </div>
 
     <script src="_framework/blazor.server.js"></script>
+    <script>
+        window.handleTickerChanged = (quoteArray) => {
+            // ... client-side processing/display code ...
+            alert('Are you sure?')
+        };
+    </script>
+
 </body>
 </html>

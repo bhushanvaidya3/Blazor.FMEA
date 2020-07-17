@@ -2,6 +2,7 @@
 using Blazor.FMEA.UI.Services.Master;
 using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,12 +29,14 @@ namespace Blazor.FMEA.UI.Pages.Master.SiteMaster
         #region Variables
         public SiteMasterDO SiteMasterDO { get; set; } = new SiteMasterDO();
 
+        public bool Saved { get; set; }
         #endregion
 
         #region Blazor Life-cycle Methods
         protected override async Task OnInitializedAsync()
         {
-            SiteMasterDO = await SiteMasterDataService.GetSiteMasterRecordByNumber(Site_Number);
+            if (int.Parse(Site_Number) > 0)
+                SiteMasterDO = await SiteMasterDataService.GetSiteMasterRecordByNumber(Site_Number);            
         }
         #endregion
 
@@ -42,11 +45,20 @@ namespace Blazor.FMEA.UI.Pages.Master.SiteMaster
         {
             try
             {
-                SiteMasterDO = await SiteMasterDataService.UpdateSiteMasterRecord(SiteMasterDO).ContinueWith(t => { toastService.ShowSuccess("Record updated successfullly!"); return t.Result; });
+                if(int.Parse(Site_Number) <= 0)
+                {
+                    //Add Site
+                    SiteMasterDO = await SiteMasterDataService.CreateSiteMasterRecord(SiteMasterDO).ContinueWith(t => { toastService.ShowSuccess("Record created successfully!"); return t.Result; });
+                }
+                else
+                {
+                    //Update Site
+                    SiteMasterDO = await SiteMasterDataService.UpdateSiteMasterRecord(SiteMasterDO).ContinueWith(t => { toastService.ShowSuccess("Record updated successfullly!"); return t.Result; });
+                }
+                navigationManager.NavigateTo("/siteMaster");
             }
             catch (System.Exception ex)
             {
-
                 throw ex;
             }
         }

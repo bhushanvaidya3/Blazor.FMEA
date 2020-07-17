@@ -1,0 +1,47 @@
+﻿@page "/blazorDialog"
+@page "/blazorDialog/{id}"
+
+<button class="btn btn-primary" @onclick="@ModalShow"><i class="fas fa-trash-alt"></i></button>
+
+@if (showModal)
+{
+    <div class="modal fade show" id="myModal" style="display:block" aria-modal="true" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Confirm action</h4>
+                    <button type="button" class="close" @onclick="@ModalCancel">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <p>This is the modal content!</p>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn" @onclick="@ModalCancel">Cancel</button>
+                    <button type="button" class="btn btn-danger" @onclick="@(() => OnClick.InvokeAsync(id))">Delete</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public string id { get; set; }
+    [Parameter] public EventCallback<string> OnClick { get; set; }
+    [CascadingParameter] public bool showModal { get; set; } = false;
+
+    void ModalShow() => showModal = true;
+    void ModalCancel() => showModal = false;
+    void ModalOk()
+    {
+        var res = id;
+        showModal = false;
+    }
+}

@@ -3,48 +3,58 @@
 @using BlazorTable
 @using Blazor.FMEA.Shared.Models.Master
 
-<h1>Site Master</h1>
-
-@if (siteMasterDOs == null)
-{
-    <em>Loading...</em>
-}
-else
-{
-    <table class="table">
-        <tr>
-            <th>Site Number</th>
-            <th>Site Description</th>
-            <th>Site Abbr</th>
-            <th>Edit</th>
-        </tr>
-        @foreach (var rec in siteMasterDOs)
-        {
-            <tr>
-                <td>@rec.Site_Number</td>
-                <td>@rec.Site_Desc</td>
-                <td>@rec.Site_Abbr</td>
-                <td>
-                    <a href="@($"siteMasterDetail/{rec.Site_Number}")" class="btn btn-primary">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                </td>
-            </tr>
-        }
-    </table>
-
-    @*<Table TableItem ="SiteMasterDO" Items="siteMasterDOs" PageSize="15">
-        <Column TableItem="SiteMasterDO" Title="Site Number" Field="@(x => x.Site_Number)" Sortable="true" Filterable="true" Width="20%" />
-        <Column TableItem="SiteMasterDO" Title="Site Description" Field="@(x => x.Site_Desc)" Sortable="true" Filterable="true" Width="20%" />
-        <Column TableItem="SiteMasterDO" Title="Site Abbr" Field="@(x => x.Site_Abbr)" Sortable="true" Filterable="true" Width="20%">
-        </Column>
-        <Column TableItem="SiteMasterDO" Title="Edit" Field="@(x => x.Site_Number)" Sortable="true" Width="10%">
-            <Template>
-                <a href="@($"siteMasterDetail/{context.Site_Number}")" class="btn btn-primary">
-                    <i class="fas fa-edit"></i>
-                </a>
-            </Template>
-        </Column>
-        <Pager ShowPageNumber="true" ShowTotalCount="true" ShowPageSizes="true" />
-    </Table>*@
-}
+<div>
+    <h1 class="float-left">Site Master</h1>
+    <a href="/siteMasterDetail/0" class="btn btn-dark table-btn quick-add-btn float-right" title="Add a record">&nbsp;&nbsp;+&nbsp;&nbsp;</a>
+</div>
+<br />
+<CascadingValue Value="@showModal">
+    @if (siteMasterDOs == null)
+    {
+        <em>Loading...</em>
+    }
+    else
+    {
+        <div>
+            <table class="table">
+                <tr>
+                    <th>Site Number</th>
+                    <th>Site Description</th>
+                    <th>Site Abbr</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                @foreach (var rec in siteMasterDOs)
+                {
+                    <tr>
+                        <td>@rec.Site_Number</td>
+                        <td>@rec.Site_Desc</td>
+                        <td>@rec.Site_Abbr</td>
+                        <td width="70px">
+                            <a href="@($"siteMasterDetail/{rec.Site_Number}")" class="btn btn-primary" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </td>
+                        <td width="80px">
+                            <BlazorDialog id=@rec.Site_Number OnClick=HandleDelete></BlazorDialog>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        @*<Table TableItem ="SiteMasterDO" Items="siteMasterDOs" PageSize="15">
+                <Column TableItem="SiteMasterDO" Title="Site Number" Field="@(x => x.Site_Number)" Sortable="true" Filterable="true" Width="20%" />
+                <Column TableItem="SiteMasterDO" Title="Site Description" Field="@(x => x.Site_Desc)" Sortable="true" Filterable="true" Width="20%" />
+                <Column TableItem="SiteMasterDO" Title="Site Abbr" Field="@(x => x.Site_Abbr)" Sortable="true" Filterable="true" Width="20%">
+                </Column>
+                <Column TableItem="SiteMasterDO" Title="Edit" Field="@(x => x.Site_Number)" Sortable="true" Width="10%">
+                    <Template>
+                        <a href="@($"siteMasterDetail/{context.Site_Number}")" class="btn btn-primary">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </Template>
+                </Column>
+                <Pager ShowPageNumber="true" ShowTotalCount="true" ShowPageSizes="true" />
+            </Table>*@
+    }
+</CascadingValue>

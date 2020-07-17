@@ -33,5 +33,17 @@ namespace Blazor.FMEA.Api.Controllers.Master
         {
             return Ok(_siteMasterRepository.UpdateSiteMaster(siteMasterDO));
         }
+
+        [HttpPost]
+        public IActionResult CreateSiteMasterRecord(SiteMasterDO siteMasterDO)
+        {
+            return Ok(_siteMasterRepository.CreateSiteMaster(siteMasterDO));
+        }
+
+        [HttpDelete("{Site_Number}")]
+        public IActionResult DeleteSiteMasterRecord(string Site_Number)
+        {
+            return Ok(_siteMasterRepository.DeleteSiteMaster(Site_Number));
+        }
     }
 }

@@ -15,6 +15,16 @@ namespace Blazor.FMEA.UI.Services.Master
             _httpClient = httpClient;
         }
 
+        public async Task<SiteMasterDO> CreateSiteMasterRecord(SiteMasterDO siteMasterDO)
+        {
+            return await _httpClient.PostJsonAsync<SiteMasterDO>($"/api/sitemaster", siteMasterDO);
+        }
+
+        public async Task<HttpResponseMessage> DeleteSiteMaster(string Site_Number)
+        {
+            return await _httpClient.DeleteAsync($"api/sitemaster/{Site_Number}");
+        }
+
         public async Task<IEnumerable<SiteMasterDO>> GetSiteMasterDOs()
         {
             //return await JsonSerializer.DeserializeAsync<IEnumerable<SiteMasterDO>>

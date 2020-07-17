@@ -11,7 +11,7 @@
     <ValidationSummary />
     <div class="form-group row">
         <label for="siteNumber" class="col-sm-3">Site Number: </label>
-        <InputText id="siteNumber" @bind-Value="@SiteMasterDO.Site_Number" class="form-control col-sm-8" placeholder="Site Number"></InputText>
+        <InputText id="siteNumber" @bind-Value="@SiteMasterDO.Site_Number" class="form-control col-sm-8" placeholder="Site Number" autofocus></InputText>
         <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => SiteMasterDO.Site_Number)" />
     </div>
 

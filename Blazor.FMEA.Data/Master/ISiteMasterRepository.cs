@@ -7,5 +7,8 @@ namespace Blazor.FMEA.Data.Master
     {
         IEnumerable<SiteMasterDO> GetAll();
         SiteMasterDO UpdateSiteMaster(SiteMasterDO smObj);
+
+        SiteMasterDO CreateSiteMaster(SiteMasterDO smObj);
+        int DeleteSiteMaster(string Site_Number);
     }
 }
