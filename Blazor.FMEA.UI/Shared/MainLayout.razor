@@ -1,14 +1,9 @@
 ﻿@inherits LayoutComponentBase
 @using Blazored.Toast.Configuration
 
-<div class="sidebar">
-    <NavMenu />
-</div>
-
 <div class="main">
-    <div class="top-row px-4 auth">
-        <LoginDisplay />
-        <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+    <div class="container">
+        <NavMenu />
         <BlazoredToasts Position="ToastPosition.BottomRight"
                         Timeout="3"
                         IconType="IconType.Material"
@@ -16,11 +11,11 @@
                         InfoIcon=""
                         SuccessIcon=""
                         WarningIcon=""
-                        ShowProgressBar="true"
-                        />
+                        ShowProgressBar="true" />
     </div>
 
-    <div class="content px-4">
+    <div class="content px-4 container">
         @Body
     </div>
+    <NavFooter />
 </div>

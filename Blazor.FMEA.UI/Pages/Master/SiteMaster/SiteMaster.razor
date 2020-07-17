@@ -9,6 +9,8 @@
 </div>
 <br />
 <CascadingValue Value="@showModal">
+    <br />
+    <hr />
     @if (siteMasterDOs == null)
     {
         <em>Loading...</em>
@@ -42,16 +44,21 @@
                 }
             </table>
         </div>
-        @*<Table TableItem ="SiteMasterDO" Items="siteMasterDOs" PageSize="15">
+        @*<Table TableItem="SiteMasterDO" Items="siteMasterDOs" PageSize="15">
                 <Column TableItem="SiteMasterDO" Title="Site Number" Field="@(x => x.Site_Number)" Sortable="true" Filterable="true" Width="20%" />
                 <Column TableItem="SiteMasterDO" Title="Site Description" Field="@(x => x.Site_Desc)" Sortable="true" Filterable="true" Width="20%" />
                 <Column TableItem="SiteMasterDO" Title="Site Abbr" Field="@(x => x.Site_Abbr)" Sortable="true" Filterable="true" Width="20%">
                 </Column>
-                <Column TableItem="SiteMasterDO" Title="Edit" Field="@(x => x.Site_Number)" Sortable="true" Width="10%">
+                <Column TableItem="SiteMasterDO" Title="Edit" Field="@(x => x.Site_Number)" Sortable="true" Width="4%">
                     <Template>
                         <a href="@($"siteMasterDetail/{context.Site_Number}")" class="btn btn-primary">
                             <i class="fas fa-edit"></i>
                         </a>
+                    </Template>
+                </Column>
+                <Column TableItem="SiteMasterDO" Title="Delete" Field="@(x => x.Site_Number)" Sortable="true" Width="4%">
+                    <Template>
+                        <BlazorDialog id=@context.Site_Number OnClick=HandleDelete></BlazorDialog>
                     </Template>
                 </Column>
                 <Pager ShowPageNumber="true" ShowTotalCount="true" ShowPageSizes="true" />
