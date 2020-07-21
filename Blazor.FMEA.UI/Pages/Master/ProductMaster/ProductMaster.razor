@@ -1,0 +1,63 @@
+﻿@page "/productMaster"
+@inherits ProductMasterBase
+
+<div>
+    <h1 class="float-left">Product Master</h1>
+    <a href="/productMasterDetail/0" class="btn btn-dark table-btn quick-add-btn float-right" title="Add a record">&nbsp;&nbsp;+&nbsp;&nbsp;</a>
+</div>
+<br />
+<CascadingValue Value="@showModal">
+    <br />
+    <hr />
+    @if (productMasterDOs == null)
+    {
+        <em>Loading...</em>
+    }
+    else
+    {
+        <div>
+            <table class="table">
+                <tr>
+                    <th>Product Class</th>
+                    <th>Essex Specification</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                @foreach (var rec in productMasterDOs)
+                {
+                    <tr>
+                        <td>@rec.Product_Class</td>
+                        <td>@rec.Essex_Specification</td>
+                        <td width="70px">
+                            <a href="@($"productMasterDetail/{rec.Product_Class}")" class="btn btn-primary" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </td>
+                        <td width="80px">
+                            <BlazorDialog id=@rec.Product_Class OnClick=HandleDelete></BlazorDialog>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        @*<Table TableItem="SiteMasterDO" Items="productMasterDOs" PageSize="15">
+                <Column TableItem="SiteMasterDO" Title="Site Number" Field="@(x => x.Site_Number)" Sortable="true" Filterable="true" Width="20%" />
+                <Column TableItem="SiteMasterDO" Title="Site Description" Field="@(x => x.Site_Desc)" Sortable="true" Filterable="true" Width="20%" />
+                <Column TableItem="SiteMasterDO" Title="Site Abbr" Field="@(x => x.Site_Abbr)" Sortable="true" Filterable="true" Width="20%">
+                </Column>
+                <Column TableItem="SiteMasterDO" Title="Edit" Field="@(x => x.Site_Number)" Sortable="true" Width="4%">
+                    <Template>
+                        <a href="@($"siteMasterDetail/{context.Site_Number}")" class="btn btn-primary">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </Template>
+                </Column>
+                <Column TableItem="SiteMasterDO" Title="Delete" Field="@(x => x.Site_Number)" Sortable="true" Width="4%">
+                    <Template>
+                        <BlazorDialog id=@context.Site_Number OnClick=HandleDelete></BlazorDialog>
+                    </Template>
+                </Column>
+                <Pager ShowPageNumber="true" ShowTotalCount="true" ShowPageSizes="true" />
+            </Table>*@
+    }
+</CascadingValue>

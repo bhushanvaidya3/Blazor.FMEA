@@ -39,6 +39,7 @@ namespace Blazor.FMEA.UI
 
             //Http Services
             RegisterTypedClient<ISiteMasterDataService, SiteMasterDataService>(fmeaApiURI);
+            RegisterTypedClient<IProductMasterDataService, ProductMasterDataService>(fmeaApiURI);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

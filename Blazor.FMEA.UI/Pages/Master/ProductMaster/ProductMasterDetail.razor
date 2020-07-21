@@ -1,0 +1,21 @@
+﻿@page "/productMasterDetail"
+@page "/productMasterDetail/{Product_Class}"
+
+@inherits ProductMasterDetailBase
+
+<h3>Product Master Detail</h3>
+<hr />
+
+<EditForm Model="@ProductMasterDO" OnValidSubmit="@HandleValidSubmit">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group row">
+        <label for="Essex_Specification" class="col-sm-3">Essex Specification: </label>
+        <InputText id="Essex_Specification" @bind-Value="@ProductMasterDO.Essex_Specification" class="form-control col-sm-8" placeholder="Essex Specification" autofocus></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => ProductMasterDO.Essex_Specification)" />
+    </div>
+
+    <button type="submit" class="btn btn-primary edit-btn">Save</button>
+    <a href="/productMaster" class="btn btn-secondary">Back</a>
+</EditForm>

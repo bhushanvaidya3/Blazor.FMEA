@@ -21,6 +21,7 @@ namespace Blazor.FMEA.Api
         {
             services.AddControllers();
             services.AddTransient<ISiteMasterRepository, SiteMasterRepository>();
+            services.AddTransient<IProductMasterRepository, ProductMasterRepository>();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();

@@ -18,8 +18,8 @@ namespace Blazor.FMEA.UI.Pages.Master
         [Inject]
         IToastService toastService { get; set; }
 
-        [Inject]
-        private IJSRuntime JSRuntime { get; set; }
+        //[Inject]
+        //private IJSRuntime JSRuntime { get; set; }
         public List<SiteMasterDO> siteMasterDOs { get; set; }
         protected bool showModal = false;
 
